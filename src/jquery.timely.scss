@@ -1,0 +1,18 @@
+.timely {
+  .x-period {
+
+  }
+
+  .y-period {
+
+  }
+
+  .time-grid {
+    border: 1px solid black;
+    .time-unit {
+      width: 15px;
+      height: 15px;
+      border: 1px solid green;
+    }
+  }
+}

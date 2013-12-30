@@ -1,1 +1,1 @@
-.timely .time-grid{border:1px solid black}.timely .time-grid .time-unit{width:15px;height:15px;border:1px solid green}
+.timely .time-grid{border:1px solid black;display:inline-block}.timely .time-grid .time-unit{width:15px;height:15px;border:1px solid green}.timely .time-grid .week{display:inline-block}

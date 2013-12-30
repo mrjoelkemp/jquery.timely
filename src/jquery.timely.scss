@@ -9,10 +9,15 @@
 
   .time-grid {
     border: 1px solid black;
+    display: inline-block;
     .time-unit {
       width: 15px;
       height: 15px;
       border: 1px solid green;
+    }
+
+    .week {
+      display: inline-block;
     }
   }
 }

@@ -31,7 +31,7 @@
     var $day = $(unitTemplate),
     //     monthsWith31days = [1, 3, 5, 7, 8, 10, 12],
         $template = $(gridTemplate),
-        $week;
+        $week, absoluteDay;
     //     month, day, numDays;
 
     // for (month = 1; month <= 12; month++) {
@@ -49,8 +49,13 @@
 
       for (var day = 1; day <= 7; day++) {
         $day = $(unitTemplate);
-        $day.addClass('day' + ' ' + day);
+        // Day 1 to 365
+        absoluteDay = day + (7 * (week - 1));
+
+        $day.addClass('day' + ' ' + absoluteDay);
+
         $day.data('value', day);
+
         $week.append($day);
       }
 

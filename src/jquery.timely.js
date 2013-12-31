@@ -44,13 +44,13 @@
 
     for (var week = 1; week <= 52; week++) {
       $week = $('<div class="week"></div>');
+      $week.addClass(' ' + week);
       $week.data('value', week);
 
       for (var day = 1; day <= 7; day++) {
         $day = $(unitTemplate);
-        $day.addClass('day');
+        $day.addClass('day' + ' ' + day);
         $day.data('value', day);
-
         $week.append($day);
       }
 

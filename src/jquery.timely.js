@@ -22,8 +22,6 @@
         // Grab the element before it's in the dom to minimize potential reflow
         $grid = getPeriodGrid(options.period);
 
-    // renderPeriod.call(this, options.period);
-
     options.data = generateDebugData();
 
     renderColors($grid, options.data, options.color);
@@ -67,16 +65,16 @@
         });
 
         $.each(data, function (unitValue, intensity) {
-          var element = units[unitValueIndexMap[unitValue]],
-              color = getIntensifiedColor(baseColor, intensity);
+          var element = units[unitValueIndexMap[unitValue]];
 
-          console.log(color);
-          // Color intensity for the unit
-          // TODO: Make color channel configurable (select red, green or blue)
-          // OR just use the intensity to dictate the alpha map and allow a base color as an option
-          // if (element) element.style.background = 'rgb(0,' + Math.round(255 * intensity) + ',0)';
+          // Use the intensity to dictate the alpha map and allow a base color as an option
           if (element) {
-            element.style.background = color;
+            $(element).data('intensity', intensity);
+
+            element.style.background = baseColor;
+            // Use the inverse since we want a small intensity to
+            element.style.opacity = intensity;
+            element.style.filter = 'alpha(opacity=' + (1 - intensity) + ')';
           }
         });
       };
@@ -136,25 +134,43 @@
   /////////////////////////
 
   var
+      // Get the color representing the distance between the supplied
+      // color and white. This color will be used for varying intensity
+      // of the base color
+      getDiffColor = function (base) {
+        var rgb = isRGB(base) ? base : hexToRgb(base);
+
+        rgb.r = 255 - rgb.r;
+        rgb.g = 255 - rgb.g;
+        rgb.b = 255 - rgb.b;
+
+        return rgb;
+      },
+
+      // Precond:
+      //    base is only a hex string or rgb object
       getIntensifiedColor = function (base, intensity) {
-        var isHex = typeof base === 'string' && base.indexOf('#') !== -1,
-            isRGB = typeof base === 'object' &&
-                    typeof base.r !== 'undefined' &&
-                    typeof base.g !== 'undefined' &&
-                    typeof base.b !== 'undefined',
-            rgb = isRGB ? base : {};
+        var rgb = isRGB(base) ? base : hexToRgb(base);
 
-        if (isHex) {
-          rgb = hexToRgb(base);
-
-          rgb.r *= intensity;
-          rgb.g *= intensity;
-          rgb.b *= intensity;
-        }
-
-        // TODO: Empty units should be white, not black
+        rgb.r *= intensity;
+        rgb.g *= intensity;
+        rgb.b *= intensity;
 
         return 'rgb(' + Math.round(rgb.r) + ',' + Math.round(rgb.g) + ',' + Math.round(rgb.b) + ')';
+      },
+
+      isHex = function (base) {
+        return typeof base === 'string' &&
+          base.indexOf('#') !== -1 &&
+          // Shorthand or long form (including hash)
+          (base.length === 4 || base.length === 7);
+      },
+
+      isRGB = function (base) {
+        return typeof base === 'object' &&
+          typeof base.r !== 'undefined' &&
+          typeof base.g !== 'undefined' &&
+          typeof base.b !== 'undefined';
       },
 
       // Returns the hex representation of the passed rgb color components

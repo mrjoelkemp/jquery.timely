@@ -2,16 +2,36 @@
 <head>
   <title>Timely demo</title>
   <link rel="stylesheet" type="text/css" href="../src/jquery.timely.css">
+
+  <style>
+    body > div {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="demo"></div>
+  <div class="demo1"></div>
+  <div class="demo2"></div>
+  <div class="demo3"></div>
+  <div class="demo4"></div>
 
   <script src="components/jquery/jquery.min.js"></script>
   <script src="../src/jquery.timely.js"></script>
 
   <script>
-    $('.demo').timely();
+    $('.demo1').timely({
+      color: '#FFF'
+    });
+    $('.demo2').timely({
+      color: '#F00'
+    });
+    $('.demo3').timely({
+      color: '#0F0'
+    });
+    $('.demo4').timely({
+      color: '#00F'
+    });
   </script>
 </body>
 </html>

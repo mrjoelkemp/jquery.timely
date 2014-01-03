@@ -152,6 +152,8 @@
           rgb.b *= intensity;
         }
 
+        // TODO: Empty units should be white, not black
+
         return 'rgb(' + Math.round(rgb.r) + ',' + Math.round(rgb.g) + ',' + Math.round(rgb.b) + ')';
       },
 

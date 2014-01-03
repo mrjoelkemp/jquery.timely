@@ -22,8 +22,6 @@
         // Grab the element before it's in the dom to minimize potential reflow
         $grid = getPeriodGrid(options.period);
 
-    options.data = generateDebugData();
-
     renderColors($grid, options.data, options.color);
 
     $this.html($grid);
@@ -78,21 +76,6 @@
           }
         });
       };
-
-  /////////////////////////
-  // Debug helpers
-  /////////////////////////
-
-  var generateDebugData = function () {
-    var data = {};
-
-    // For every day of the year
-    for (var i = 1; i < 365; i++) {
-      data[i] = Math.random().toFixed(2);
-    }
-
-    return data;
-  };
 
   /////////////////////////
   // Time period helpers

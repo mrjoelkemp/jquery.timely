@@ -8,6 +8,23 @@
       margin-bottom: 15px;
     }
   </style>
+
+  <script>
+  /////////////////////////
+  // Debug helpers
+  /////////////////////////
+
+  function generateDebugData () {
+    var data = {};
+
+    // For every day of the year
+    for (var i = 1; i < 365; i++) {
+      data[i] = Math.random().toFixed(2);
+    }
+
+    return data;
+  };
+  </script>
 </head>
 
 <body>
@@ -21,16 +38,20 @@
 
   <script>
     $('.demo1').timely({
-      color: '#926300'
+      color: '#926300',
+      data: generateDebugData()
     });
     $('.demo2').timely({
-      color: '#F00'
+      color: '#F00',
+      data: generateDebugData()
     });
     $('.demo3').timely({
-      color: '#0F0'
+      color: '#0F0',
+      data: generateDebugData()
     });
     $('.demo4').timely({
-      color: '#00F'
+      color: '#00F',
+      data: generateDebugData()
     });
   </script>
 </body>

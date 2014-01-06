@@ -2,10 +2,18 @@
   'use strict';
 
   var
-      unitTemplate = '<div class="time-unit"></div>',
-      gridTemplate = '<div class="time-grid"></div>',
-      // TODO: Month names, days of week (axes)
-      periodTemplate = '<div class="timely"></div>';
+      periodTemplate  = '<div class="timely"></div>',
+      unitTemplate    = '<div class="time-unit"></div>',
+      gridTemplate    = '<div class="time-grid"></div>',
+      xAxisTemplate   = '<div class="x-axis"></div>',
+      yAxisTemplate   = '<div class="y-axis"></div>',
+
+      monthNames  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      dayNames    = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+
+      monthNameTemplate = '<div class="month-name"></div>',
+      dayNameTemplate   = '<div class="day-name"></div>',
+      weekTemplate      = '<div class="week"></div>';
 
   // Options:
   //    period: 'monthly', 'daily' (TODO)
@@ -14,17 +22,15 @@
   $.fn.timely = function (options) {
     options = $.extend({
       period: 'monthly',
-      color: '#0F0'
+      color:  '#0F0'
     }, options);
 
-    var
-        $this = $(this),
-        // Grab the element before it's in the dom to minimize potential reflow
-        $grid = getPeriodGrid(options.period);
+    // Grab the element before it's in the dom to minimize potential reflow
+    var $grid = getPeriodGrid(options.period);
 
     renderColors($grid, options.data, options.color);
 
-    $this.html($grid);
+    $(this).html($grid);
   };
 
   /////////////////////////
@@ -35,13 +41,38 @@
       // Returns a jQuery element representing the generated dom for
       // the passed period
       getPeriodGrid = function (period) {
-        var $template;
+        var $template, $xAxis, $yAxis, $grid;
 
         if (period.toLowerCase() === 'monthly') {
           $template = $(periodTemplate);
 
+          // Generate the x axis
+          // 3-letter month names
+          $xAxis = $(xAxisTemplate);
+          monthNames.forEach(function (name) {
+            var $monthName = $(monthNameTemplate).text(name.slice(0, 3));
+            $xAxis.append($monthName);
+          });
+
+          // Generate the y axis
+          // Single letter days of the week
+          $yAxis = $(weekTemplate);
+          dayNames.forEach(function (name, idx) {
+            var $dayName = $(dayNameTemplate).text(name[0].toUpperCase());
+            // Alternate the days shown
+            if (idx % 2 === 0) $dayName.css('visibility', 'hidden');
+            $yAxis.append($dayName);
+          });
+          $yAxis.addClass('y-axis');
+
+          // Add the month names
+          $template.append($xAxis);
+
+          $grid = getMonthlyGrid();
+          $grid.prepend($yAxis);
+
           // Fill out the grid
-          $template.append(getMonthlyGrid());
+          $template.append($grid);
         }
 
         return $template;
@@ -62,10 +93,10 @@
           }
         });
 
+        // Use the intensity to dictate the alpha map and allow a base color as an option
         $.each(data, function (unitValue, intensity) {
           var element = units[unitValueIndexMap[unitValue]];
 
-          // Use the intensity to dictate the alpha map and allow a base color as an option
           if (element) {
             $(element).data('intensity', intensity);
 
@@ -89,7 +120,7 @@
             $week, absoluteDay;
 
         for (var week = 1; week <= 52; week++) {
-          $week = $('<div class="week"></div>');
+          $week = $(weekTemplate);
           $week
             .addClass(week.toString())
             .data('value', week);

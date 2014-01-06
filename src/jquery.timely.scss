@@ -1,23 +1,52 @@
 .timely {
-  .x-period {
-
+  $unit-width: 15px;
+  $border-width: 1px;
+  
+  // Base style for each box
+  .time-unit {
+    width: $unit-width;
+    height: $unit-width;
+    border: $border-width solid #DDD;
+  }
+  
+  // Common styles for axes
+  .month-name, .day-name {
+    text-align: center;
+    font-size: 14px;
+    color: #AAA;
   }
 
-  .y-period {
+  .x-axis {
+    margin-bottom: 3px;
+    .month-name {
+      $normal-width: 4 * ($unit-width + 2px);
+      // 4 weeks in a month
+      width: $normal-width;
+      display: inline-block;
 
+      &.odd-days {
+        width: $normal-width + $unit-width;
+      }
+    }
+  }
+
+  .y-axis {
+    // Assuming the text is causing the box to render lower than others
+    position: relative;
+    top: -3px;
+    // Y-axis for months
+    .day-name {
+      @extend .time-unit;
+      border-color: transparent;
+    }
   }
 
   .time-grid {
-    border: 1px solid black;
     display: inline-block;
-    .time-unit {
-      width: 15px;
-      height: 15px;
-      border: 1px solid green;
-    }
 
     .week {
       display: inline-block;
+
     }
   }
 }

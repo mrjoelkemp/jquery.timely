@@ -18,8 +18,10 @@
 
   .x-axis {
     margin-bottom: 3px;
+    margin-left: $unit-width + $border-width;
+    display: inline-block;
     .month-name {
-      $normal-width: 4 * ($unit-width + 2px);
+      $normal-width: 4 * ($unit-width + (2 * $border-width));
       // 4 weeks in a month
       width: $normal-width;
       display: inline-block;
@@ -47,6 +49,14 @@
     .week {
       display: inline-block;
 
+      // Add some space every 4 weeks
+      @for $i from 0 to 52 {
+        @if ($i % 4 == 0) {
+          &:nth-child(#{$i + 1}) {
+            margin-left: 5px;  
+          }
+        }
+      }
     }
   }
 }

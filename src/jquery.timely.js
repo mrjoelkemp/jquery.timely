@@ -28,6 +28,8 @@
     // Grab the element before it's in the dom to minimize potential reflow
     var $grid = getPeriodGrid(options.period);
 
+    options.color = isHex(options.color) ? hexToRgb(options.color) : options.color;
+
     renderColors($grid, options.data, options.color);
 
     $(this).html($grid);
@@ -99,10 +101,9 @@
           if (element) {
             $(element).data('intensity', intensity);
 
-            element.style.background = baseColor;
-            // Use the inverse since we want a small intensity to
-            element.style.opacity = intensity;
-            element.style.filter = 'alpha(opacity=' + (1 - intensity) + ')';
+            // Convert to an rgba string instead of using opacity directly
+            // to only modify the background's color
+            element.style.background = getRgbString(baseColor, intensity);
           }
         });
       };
@@ -142,5 +143,40 @@
         return $template;
       };
 
+  /////////////////////////
+  // Color helpers
+  /////////////////////////
+
+  var
+      isHex = function (base) {
+        return typeof base === 'string' &&
+          base.indexOf('#') !== -1 &&
+          // Shorthand or long form (including hash)
+          (base.length === 4 || base.length === 7);
+      },
+
+      // Returns a css rgb color string representation of the passed rgb object and intensity
+      getRgbString = function (baseColor, intensity) {
+        intensity = typeof intensity !== 'undefined' ? intensity : 1;
+
+        return 'rgba(' + baseColor.r + ',' + baseColor.g + ',' + baseColor.b + ',' + intensity + ')';
+      },
+
+      // Returns an object of rgb components from the passed hex value
+      // Note: Taken from http://stackoverflow.com/a/5624139/700897
+      hexToRgb = function (hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    };
 
 })(window.jQuery);

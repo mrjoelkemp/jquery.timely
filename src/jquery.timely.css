@@ -1,1 +1,37 @@
-.timely .time-unit,.timely .y-axis .day-name{width:15px;height:15px;border:1px solid #ddd}.timely .month-name,.timely .day-name{text-align:center;font-size:14px;color:#AAA}.timely .x-axis{margin-bottom:3px;margin-left:16px;display:inline-block}.timely .x-axis .month-name{width:68px;display:inline-block}.timely .x-axis .month-name.odd-days{width:83px}.timely .y-axis{position:relative;top:-3px}.timely .y-axis .day-name{border-color:transparent}.timely .time-grid{display:inline-block}.timely .time-grid .week{display:inline-block}.timely .time-grid .week:nth-child(1){margin-left:5px}.timely .time-grid .week:nth-child(5){margin-left:5px}.timely .time-grid .week:nth-child(9){margin-left:5px}.timely .time-grid .week:nth-child(13){margin-left:5px}.timely .time-grid .week:nth-child(17){margin-left:5px}.timely .time-grid .week:nth-child(21){margin-left:5px}.timely .time-grid .week:nth-child(25){margin-left:5px}.timely .time-grid .week:nth-child(29){margin-left:5px}.timely .time-grid .week:nth-child(33){margin-left:5px}.timely .time-grid .week:nth-child(37){margin-left:5px}.timely .time-grid .week:nth-child(41){margin-left:5px}.timely .time-grid .week:nth-child(45){margin-left:5px}.timely .time-grid .week:nth-child(49){margin-left:5px}
+.timely .time-unit, .timely .y-axis .day-name {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #dddddd;
+}
+.timely .month-name, .timely .day-name {
+  text-align: center;
+  font-size: 14px;
+  color: #AAA;
+}
+.timely .x-axis {
+  margin-bottom: 3px;
+  margin-left: 19px;
+  display: inline-block;
+}
+.timely .x-axis .month-name {
+  width: 75px;
+  display: inline-block;
+}
+.timely .x-axis .month-name:nth-child(2) {
+  width: 58px;
+}
+.timely .y-axis {
+  position: relative;
+  top: -3px;
+  display: inline-block;
+  margin-right: 3px;
+}
+.timely .y-axis .day-name {
+  border-color: transparent;
+}
+.timely .time-grid {
+  display: inline-block;
+}
+.timely .time-grid .week {
+  display: inline-block;
+}

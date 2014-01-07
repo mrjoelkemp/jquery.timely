@@ -1,7 +1,8 @@
 .timely {
   $unit-width: 15px;
   $border-width: 1px;
-  
+  $y-axis-spacing: 3px;
+
   // Base style for each box
   .time-unit {
     width: $unit-width;
@@ -18,16 +19,21 @@
 
   .x-axis {
     margin-bottom: 3px;
-    margin-left: $unit-width + $border-width;
+    // Push the x axis over to line up with the first box
+    margin-left: $unit-width + $border-width + $y-axis-spacing;
     display: inline-block;
+    
+    // A month name spans 5 weeks since there are only 28 days
+    // in 4 weeks and months roughly have 30
     .month-name {
-      $normal-width: 4 * ($unit-width + (2 * $border-width));
-      // 4 weeks in a month
+      // We just want the months to float over roughly
+      $normal-width: 5 * $unit-width;
       width: $normal-width;
       display: inline-block;
 
-      &.odd-days {
-        width: $normal-width + $unit-width;
+      // Feb only has 28 days
+      &:nth-child(2) {
+        width: $normal-width - $unit-width - (2 * $border-width);
       }
     }
   }
@@ -36,6 +42,9 @@
     // Assuming the text is causing the box to render lower than others
     position: relative;
     top: -3px;
+    display: inline-block;
+    margin-right: $y-axis-spacing;
+
     // Y-axis for months
     .day-name {
       @extend .time-unit;
@@ -48,15 +57,6 @@
 
     .week {
       display: inline-block;
-
-      // Add some space every 4 weeks
-      @for $i from 0 to 52 {
-        @if ($i % 4 == 0) {
-          &:nth-child(#{$i + 1}) {
-            margin-left: 5px;  
-          }
-        }
-      }
     }
   }
 }

@@ -56,14 +56,13 @@
 
           // Generate the y axis
           // Single letter days of the week
-          $yAxis = $(weekTemplate);
+          $yAxis = $(yAxisTemplate);
           dayNames.forEach(function (name, idx) {
             var $dayName = $(dayNameTemplate).text(name[0].toUpperCase());
             // Alternate the days shown
             if (idx % 2 === 0) $dayName.css('visibility', 'hidden');
             $yAxis.append($dayName);
           });
-          $yAxis.addClass('y-axis');
 
           // Add the month names
           $template.append($xAxis);

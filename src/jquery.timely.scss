@@ -1,16 +1,17 @@
 .timely {
   $unit-width: 15px;
   $border-width: 1px;
+  $default-border: $border-width solid #ddd;
   $y-axis-spacing: 3px;
 
   // Base style for each box
   .time-unit {
     width: $unit-width;
     height: $unit-width;
-    border: $border-width solid #ddd;
+    border: $default-border;
 
     &:hover {
-      border: $border-width solid #000;
+      border-color: #000;
     }
   }
   
@@ -25,7 +26,6 @@
     margin-bottom: 3px;
     // Push the x axis over to line up with the first box
     margin-left: $unit-width + $border-width + $y-axis-spacing;
-    display: inline-block;
 
     // A month name spans 5 weeks since there are only 28 days
     // in 4 weeks and months roughly have 30
@@ -53,6 +53,9 @@
     .day-name {
       @extend .time-unit;
       border-color: transparent;
+      &:hover {
+        border-color: transparent;
+      }
     }
   }
 

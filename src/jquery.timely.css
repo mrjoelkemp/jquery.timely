@@ -4,7 +4,7 @@
   border: 1px solid #dddddd;
 }
 .timely .time-unit:hover, .timely .y-axis .day-name:hover {
-  border: 1px solid black;
+  border-color: #000;
 }
 .timely .month-name, .timely .day-name {
   text-align: center;
@@ -14,7 +14,6 @@
 .timely .x-axis {
   margin-bottom: 3px;
   margin-left: 19px;
-  display: inline-block;
 }
 .timely .x-axis .month-name {
   width: 75px;
@@ -30,6 +29,9 @@
   margin-right: 3px;
 }
 .timely .y-axis .day-name {
+  border-color: transparent;
+}
+.timely .y-axis .day-name:hover {
   border-color: transparent;
 }
 .timely .time-grid {

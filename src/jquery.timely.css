@@ -4,7 +4,7 @@
   border: 1px solid #dddddd;
 }
 .timely .time-unit:hover, .timely .y-axis .day-name:hover {
-  border: 1px solid #333333;
+  border: 1px solid black;
 }
 .timely .month-name, .timely .day-name {
   text-align: center;

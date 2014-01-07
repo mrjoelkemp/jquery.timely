@@ -1,3 +1,5 @@
+// Joel Kemp, @mrjoelkemp
+// https://github.com/mrjoelkemp/jquery.timely
 ;(function ($) {
   'use strict';
 

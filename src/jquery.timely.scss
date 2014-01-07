@@ -7,7 +7,11 @@
   .time-unit {
     width: $unit-width;
     height: $unit-width;
-    border: $border-width solid #DDD;
+    border: $border-width solid #ddd;
+
+    &:hover {
+      border: $border-width solid #333;
+    }
   }
   
   // Common styles for axes
@@ -22,7 +26,7 @@
     // Push the x axis over to line up with the first box
     margin-left: $unit-width + $border-width + $y-axis-spacing;
     display: inline-block;
-    
+
     // A month name spans 5 weeks since there are only 28 days
     // in 4 weeks and months roughly have 30
     .month-name {

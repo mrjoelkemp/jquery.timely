@@ -3,6 +3,9 @@
   height: 15px;
   border: 1px solid #dddddd;
 }
+.timely .time-unit:hover, .timely .y-axis .day-name:hover {
+  border: 1px solid #333333;
+}
 .timely .month-name, .timely .day-name {
   text-align: center;
   font-size: 14px;

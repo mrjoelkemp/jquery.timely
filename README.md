@@ -52,6 +52,7 @@ If you'd like to change the look and feel, override the following classes:
 
 * Support twitter bootstrap tooltip message
  * Mapping value could be an object 
+  
   ```javascript
     $('#my-elem').timely({
       color: '#926300',
